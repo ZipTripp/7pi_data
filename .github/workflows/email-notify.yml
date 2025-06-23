@@ -17,7 +17,7 @@ jobs:
           username: apikey
           password: ${{ secrets.SENDGRID_API_KEY }}
           subject: "data.json was updated!"
-          to: nirwairkumar1@gmail.com
+          to: ce22b080@smail.iitm.ac.in
           from: ce22b080@smail.iitm.ac.in
           body: |
             Hi there,
