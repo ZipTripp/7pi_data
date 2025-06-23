@@ -15,9 +15,9 @@ jobs:
           server_address: smtp.sendgrid.net
           server_port: 587
           username: apikey
-          password: ${{ secrets.SENDFORFIRST }}
+          password: ${{ secrets.SENDGRID_API_KEY }}
           subject: "data.json was updated!"
-          to: ce22b080@smail.iitm.ac.in
+          to: nkchaudhary431@gmail.com
           from: ce22b080@smail.iitm.ac.in
           body: |
             Hi there,
