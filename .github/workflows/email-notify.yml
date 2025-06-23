@@ -1,4 +1,4 @@
-name: 📧 Notify on data.json Update
+name: Notify on data.json Update
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
           server_address: smtp.sendgrid.net
           server_port: 587
           username: apikey
-          password: ${{ secrets.SENDGRID_API_KEY }}
+          password: ${{secrets.SENDGRID_API_KEY}}
           subject: "data.json was updated!"
           to: nkchaudhary431@gmail.com
           from: learnirwair@gmail.com
