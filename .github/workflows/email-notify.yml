@@ -15,10 +15,15 @@ jobs:
           server_address: smtp.sendgrid.net
           server_port: 587
           username: apikey
-          password: ${ secrets.SENDGRID_API_KEY }
-          subject: "✅ data.json was updated!"
+          password: ${{ secrets.SENDGRID_API_KEY }}
+          subject: "data.json was updated!"
           to: nirwairkumar1@gmail.com
           from: ce22b080@smail.iitm.ac.in
           body: |
-            The file **data.json** has been updated in the [7pi_data repo](https://github.com/ZipTripp/7pi_data).
-            View live data here: https://ziptripp.github.io/7pi_data/data.json
+            Hi there,
+      
+            This is an automated message from the 7pi_data repo.
+            The file `data.json` has been updated.
+
+            📄 View the file here:
+            https://ziptripp.github.io/7pi_data/data.json
