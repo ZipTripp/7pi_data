@@ -1,4 +1,4 @@
-[
+const quizData = [
   {
     "question": "ईस्ट इंडिया कंपनी की स्थापना किसने की थी?",
     "options": [

@@ -47,20 +47,18 @@
       quizTitle.textContent = "❌ Quiz Not Found";
       form.innerHTML = "<p>URL में कोई क्विज चयनित नहीं है। कृपया ?quiz=quiz-name का उपयोग करें।</p>";
     } else {
-      fetch(`quizzes/${quizName}.json`)
-        .then((res) => {
-          if (!res.ok) throw new Error("Quiz not found");
-          return res.json();
-        })
-        .then((data) => {
-          quizData = data;
-          quizTitle.textContent = `Quiz: ${quizName.replace(/[-_]/g, ' ')}`;
-          loadQuiz();
-        })
-        .catch((err) => {
-          quizTitle.textContent = "❌ Error Loading Quiz";
-          form.innerHTML = `<p>Quiz \\"${quizName}\\" लोड नहीं हो पाया।</p>`;
-        });
+      const script = document.createElement("script");
+      script.src = `${quizName}.js`;
+      script.onload = () => {
+        quizData = window.quizData;
+        quizTitle.textContent = `Quiz: ${quizName.replace(/[-_/]/g, ' ')}`;
+        loadQuiz();
+      };
+      script.onerror = () => {
+        quizTitle.textContent = "❌ Error Loading Quiz";
+        form.innerHTML = `<p>Quiz \"${quizName}\" लोड नहीं हो पाया।</p>`;
+      };
+      document.body.appendChild(script);
     }
 
     function loadQuiz() {
@@ -89,7 +87,7 @@
 
       quizData.forEach((q, i) => {
         const selected = document.querySelector(`input[name="q${i}"]:checked`);
-        const answer = q.correctIndex;
+        const answer = q.correct_answer;
 
         if (selected) {
           const chosenIndex = parseInt(selected.value);
