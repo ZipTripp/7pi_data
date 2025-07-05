@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - Constitutional Development</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Constitutional Development of India - Quiz</h1>
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+    const quizData = [
+      {
+        question: "ईस्ट इंडिया कंपनी की स्थापना किसने की थी?",
+        options: ["जेम्स प्रथम", "एलिजाबेथ प्रथम", "नॉर्थ", "क्लाइव"],
+        correctIndex: 1
+      },
+      {
+        question: "ईस्ट इंडिया कंपनी को किस वर्ष में चार्टर मिला था?",
+        options: ["1599", "1600", "1608", "1613"],
+        correctIndex: 1
+      },
+      {
+        question: "भारत में पहला गवर्नर जनरल कौन था?",
+        options: ["लॉर्ड डलहौजी", "वारेन हेस्टिंग्स", "लॉर्ड कर्जन", "लॉर्ड माउंटबेटन"],
+        correctIndex: 1
+      },
+      {
+        question: "1858 के अधिनियम द्वारा किसके हाथ से शासन ब्रिटिश सरकार को स्थानांतरित हुआ?",
+        options: ["गवर्नर जनरल", "ईस्ट इंडिया कंपनी", "ब्रिटिश पार्लियामेंट", "क्राउन"],
+        correctIndex: 1
+      }
+    ];
+
+    const form = document.getElementById("quizForm");
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question-block";
+      div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+      const optionsHTML = q.options.map((opt, j) => {
+        return `
+          <label>
+            <input type="radio" name="q${i}" value="${j}" /> ${opt}
+          </label>
+        `;
+      }).join("");
+
+      div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
