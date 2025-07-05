@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - Constitutional Development</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>पृथ्वीराज चौहान और मोहम्मद गोरी - Quiz</h1>
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+    const quizData = [
+  {
+    question: "मोहम्मद गोरी का वास्तविक नाम क्या था?",
+    options: [
+      "मोहम्मद बिन कासिम",
+      "शिहाबुद्दीन",
+      "गजनी",
+      "इल्तुतमिश"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मोहम्मद गोरी का जन्म कब हुआ था?",
+    options: [
+      "1173 ई.",
+      "1149 ई.",
+      "973 ई.",
+      "1206 ई."
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मोहम्मद गोरी की मृत्यु कब हुई थी?",
+    options: [
+      "1173 ई.",
+      "1149 ई.",
+      "1206 ई.",
+      "1192 ई."
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "मोहम्मद गोरी ने भारत पर अपना पहला आक्रमण किस स्थान पर किया था?",
+    options: [
+      "पाटन",
+      "मुल्तान",
+      "लाहौर",
+      "कन्नौज"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मोहम्मद गोरी ने गुजरात के किस शासक से युद्ध किया था?",
+    options: [
+      "भीमदेव प्रथम",
+      "अजयपाल",
+      "मूलराज द्वितीय",
+      "जयचंद"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "गुजरात की रानी, जिसने मोहम्मद गोरी को हराया था, कौन थीं?",
+    options: [
+      "रजिया सुल्तान",
+      "नायिका देवी",
+      "कुतुबी बेगम",
+      "संयोगिता"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "1178 ई. में पाटन के युद्ध में मोहम्मद गोरी को किसने हराया?",
+    options: [
+      "पृथ्वीराज चौहान",
+      "जयचंद",
+      "नायिका देवी",
+      "भीमदेव द्वितीय"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "तराइन का प्रथम युद्ध कब हुआ था?",
+    options: [
+      "1175",
+      "1178",
+      "1191",
+      "1192"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "तराइन के प्रथम युद्ध में किसकी विजय हुई थी?",
+    options: [
+      "मोहम्मद गोरी",
+      "पृथ्वीराज चौहान",
+      "जयचंद",
+      "नायिका देवी"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "तराइन का द्वितीय युद्ध कब हुआ था?",
+    options: [
+      "1178",
+      "1191",
+      "1192",
+      "1194"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "तराइन के द्वितीय युद्ध में किसकी विजय हुई थी?",
+    options: [
+      "पृथ्वीराज चौहान",
+      "मोहम्मद गोरी",
+      "जयचंद",
+      "नायिका देवी"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "पृथ्वीराज चौहान का दरबारी कवि कौन था?",
+    options: [
+      "अमीर खुसरो",
+      "चंद्रबरदाई",
+      "मिनहाज-उ-सिराज",
+      "हसन निजामी"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "पृथ्वीराज रासो के लेखक कौन हैं?",
+    options: [
+      "अमीर खुसरो",
+      "चंद्रबरदाई",
+      "हसन निजामी",
+      "अलाउद्दीन"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "पृथ्वीराज चौहान के पिता का नाम क्या था?",
+    options: [
+      "सोमेश्वर सिंह चौहान",
+      "अनंगपाल तोमर",
+      "जयचंद",
+      "विजयपाल"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "पृथ्वीराज चौहान की पत्नी का नाम क्या था?",
+    options: [
+      "कुतुबी बेगम",
+      "रजिया",
+      "संयोगिता",
+      "नायिका देवी"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "पृथ्वीराज चौहान किस राज्य के शासक थे?",
+    options: [
+      "कन्नौज",
+      "अजमेर और दिल्ली",
+      "लाहौर",
+      "गुजरात"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "चंदावर का युद्ध कब हुआ था?",
+    options: [
+      "1191",
+      "1192",
+      "1194",
+      "1206"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "चंदावर के युद्ध में मोहम्मद गोरी ने किसे हराया?",
+    options: [
+      "पृथ्वीराज चौहान",
+      "जयचंद",
+      "नायिका देवी",
+      "भीमदेव द्वितीय"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "चंदावर वर्तमान में किस नदी के तट पर स्थित है?",
+    options: [
+      "गंगा",
+      "यमुना",
+      "सरस्वती",
+      "गोमती"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "ख्वाजा मोइनुद्दीन चिश्ती की दरगाह कहाँ स्थित है?",
+    options: [
+      "दिल्ली",
+      "अजमेर",
+      "लाहौर",
+      "कन्नौज"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "नालंदा विश्वविद्यालय को किसने नष्ट किया था?",
+    options: [
+      "मोहम्मद गोरी",
+      "बख्तियार खिलजी",
+      "कुतुबुद्दीन ऐबक",
+      "इल्तुतमिश"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मोहम्मद गोरी के बाद भारत में किसने गुलाम वंश की स्थापना की?",
+    options: [
+      "इल्तुतमिश",
+      "कुतुबुद्दीन ऐबक",
+      "बलबन",
+      "बहराम शाह"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "पृथ्वीराज चौहान के समकालीन कन्नौज का शासक कौन था?",
+    options: [
+      "जयचंद",
+      "अनंगपाल",
+      "सोमेश्वर सिंह",
+      "विजयपाल"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "पृथ्वीराज चौहान के शासनकाल में दिल्ली का संस्थापक कौन था?",
+    options: [
+      "सोमेश्वर सिंह",
+      "अनंगपाल तोमर",
+      "जयचंद",
+      "विजयपाल"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "पृथ्वीराज चौहान की हार के बाद दिल्ली और अजमेर का नियंत्रण किसे सौंपा गया?",
+    options: [
+      "जयचंद",
+      "पृथ्वीराज के पुत्रों को",
+      "नायिका देवी",
+      "बबक"
+    ],
+    correctIndex: 1
+  }
+];
+
+
+    const form = document.getElementById("quizForm");
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question-block";
+      div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+      const optionsHTML = q.options.map((opt, j) => {
+        return `
+          <label>
+            <input type="radio" name="q${i}" value="${j}" /> ${opt}
+          </label>
+        `;
+      }).join("");
+
+      div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
