@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - Constitutional Development</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>खिलजी वंश और जलालुद्दीन खिलजी - Quiz</h1>
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+const quizData = [
+  {
+    question: "खिलजी वंश की स्थापना किसने की थी?",
+    options: [
+      "अलाउद्दीन खिलजी",
+      "जलालुद्दीन फिरोज खिलजी",
+      "मलिक काफूर",
+      "बलबन"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "खिलजी वंश का शासन काल कब से कब तक था?",
+    options: [
+      "1206-1290",
+      "1290-1320",
+      "1320-1351",
+      "1266-1287"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "भारत में खिलजी कौन थे?",
+    options: [
+      "तुर्क मूल के",
+      "मंगोल मूल के",
+      "अरब मूल के",
+      "अफगान मूल के"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "बख्तियार खिलजी ने किस क्षेत्र को जीता था?",
+    options: [
+      "दिल्ली",
+      "बंगाल और बिहार",
+      "गुजरात",
+      "कश्मीर"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "गुलाम वंश के अंतिम शासक कौन थे?",
+    options: [
+      "बलबन",
+      "क्यूमरश",
+      "कैमर्स",
+      "केकुबाद"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "कैमर्स की हत्या किसने करवाई थी?",
+    options: [
+      "बलबन",
+      "जलालुद्दीन खिलजी",
+      "अलाउद्दीन खिलजी",
+      "मलिक काफूर"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी ने गद्दी पर बैठने के बाद किस वर्ग को बढ़ावा दिया?",
+    options: [
+      "उच्च वर्ग",
+      "निम्न वर्ग",
+      "व्यापारी वर्ग",
+      "पुजारी वर्ग"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी का शासन किस प्रकार का था?",
+    options: [
+      "क्रूर",
+      "उदारवादी",
+      "धार्मिक",
+      "तानाशाही"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मलिक छज्जू का विद्रोह किसके शासन में हुआ था?",
+    options: [
+      "बलबन",
+      "जलालुद्दीन खिलजी",
+      "अलाउद्दीन खिलजी",
+      "केकुबाद"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी ने मलिक छज्जू को किसके संरक्षण में छोड़ा?",
+    options: [
+      "अलाउद्दीन खिलजी",
+      "अर्क अली खान",
+      "मलिक काफूर",
+      "नुसरत खान"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी के शासनकाल में दिल्ली में मंगोल आक्रमण कब हुआ?",
+    options: [
+      "1287",
+      "1292",
+      "1296",
+      "1300"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मंगोल आक्रमण का नेतृत्व किसने किया था?",
+    options: [
+      "चंगेज खान",
+      "अब्दुल्ला (चंगेज खान का पोता)",
+      "हलाकू",
+      "तैमूर"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी ने मंगोल आक्रमणकारियों को कहाँ बसाया?",
+    options: [
+      "अजमेर",
+      "मंगोलपुरी (दिल्ली)",
+      "कड़ा",
+      "लाहौर"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी के दरबारी कवि कौन थे?",
+    options: [
+      "मलिक मुहम्मद जायसी",
+      "हसन देहलवी और अमीर खुसरो",
+      "कबीर",
+      "रहीम"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "अमीर खुसरो का जन्म कहाँ हुआ था?",
+    options: [
+      "पटियाला",
+      "पटियाली (उत्तर प्रदेश)",
+      "दिल्ली",
+      "लाहौर"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "अमीर खुसरो के गुरु कौन थे?",
+    options: [
+      "निजामुद्दीन औलिया",
+      "कबीर",
+      "रहीम",
+      "मलिक काफूर"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "अमीर खुसरो को किस उपाधि से जाना जाता है?",
+    options: [
+      "तुती-ए-हिंद (हिंदुस्तान की तूती)",
+      "शायर-ए-हिंद",
+      "कवि-राज",
+      "शेख-ए-हिंद"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "अमीर खुसरो ने किस भाषा को बढ़ावा दिया?",
+    options: [
+      "फारसी",
+      "अरबी",
+      "हिंदवी (खड़ी बोली)",
+      "संस्कृत"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "अमीर खुसरो द्वारा रचित कौन सी पुस्तक चित्तौड़ विजय पर आधारित है?",
+    options: [
+      "किरान उस सादे",
+      "खजान-उल-फतह",
+      "तुगलकनामा",
+      "आशिका"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "अमीर खुसरो ने कितने सुल्तानों का दरबार देखा?",
+    options: [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "अमीर खुसरो ने भारत को कौन-कौन सी सांस्कृतिक विधाएं दीं?",
+    options: [
+      "कव्वाली",
+      "गजल",
+      "तबला और सितार",
+      "उपरोक्त सभी"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "जलालुद्दीन खिलजी की हत्या किसने करवाई?",
+    options: [
+      "मलिक काफूर",
+      "अलाउद्दीन खिलजी",
+      "कैमर्स",
+      "नुसरत खान"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "जलालुद्दीन खिलजी की हत्या कब हुई थी?",
+    options: [
+      "1292",
+      "1296",
+      "1300",
+      "1287"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "देवगिरी अभियान का नेतृत्व किसने किया था?",
+    options: [
+      "जलालुद्दीन खिलजी",
+      "अलाउद्दीन खिलजी",
+      "मलिक काफूर",
+      "नुसरत खान"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "देवगिरी के शासक का नाम क्या था?",
+    options: [
+      "रामचंद्र देव",
+      "सिंघन",
+      "मलिक छज्जू",
+      "सिद्धि मौला"
+    ],
+    correctIndex: 0
+  }
+];
+
+
+
+    const form = document.getElementById("quizForm");
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question-block";
+      div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+      const optionsHTML = q.options.map((opt, j) => {
+        return `
+          <label>
+            <input type="radio" name="q${i}" value="${j}" /> ${opt}
+          </label>
+        `;
+      }).join("");
+
+      div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
