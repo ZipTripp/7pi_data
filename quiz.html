@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="quizTitle">Quiz</h1>
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const quizName = urlParams.get("quiz");
+    const quizTitle = document.getElementById("quizTitle");
+    const form = document.getElementById("quizForm");
+    let quizData = [];
+
+    if (!quizName) {
+      quizTitle.textContent = "❌ Quiz Not Found";
+      form.innerHTML = "<p>URL में कोई क्विज चयनित नहीं है। कृपया ?quiz=quiz-name का उपयोग करें।</p>";
+    } else {
+      fetch(`quizzes/${quizName}.json`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Quiz not found");
+          return res.json();
+        })
+        .then((data) => {
+          quizData = data;
+          quizTitle.textContent = `Quiz: ${quizName.replace(/[-_]/g, ' ')}`;
+          loadQuiz();
+        })
+        .catch((err) => {
+          quizTitle.textContent = "❌ Error Loading Quiz";
+          form.innerHTML = `<p>Quiz \\"${quizName}\\" लोड नहीं हो पाया।</p>`;
+        });
+    }
+
+    function loadQuiz() {
+      form.innerHTML = "";
+      quizData.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question-block";
+        div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+        const optionsHTML = q.options.map((opt, j) => {
+          return `
+            <label>
+              <input type="radio" name="q${i}" value="${j}" /> ${opt}
+            </label>
+          `;
+        }).join("");
+
+        div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+        form.appendChild(div);
+      });
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
