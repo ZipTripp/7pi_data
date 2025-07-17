@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - Constitutional Development</title>
+
+  <!-- Constitution-and-Indian-Polity_By-Naveen-Sir-_-SSC-Foundation-naayk-Batch-2025 -->
+   <!-- SSC01A -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Constitution and Indian Polity - Quiz</h1>
+  <p> By Naveen Sir SSC Foundation naayk Batch 2025 </p>
+  <p class="text-code">Test Code: SSC01A </p>
+
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+const quizData = [
+  {
+    question: "संविधान शब्द का संधि विच्छेद क्या है?",
+    options: [
+      "सम + विधान",
+      "सं + विध",
+      "संपूर्ण + विधान",
+      "सम्भव + विधि"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "संविधान का मुख्य उद्देश्य क्या है?",
+    options: [
+      "सिर्फ कानून बनाना",
+      "देश के शासन के लिए आवश्यक नियमों का समूह",
+      "केवल जनता का मनोरंजन",
+      "सरकार की आलोचना करना"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "राजव्यवस्था (पॉलिटी) किसे कहते हैं?",
+    options: [
+      "पुलिस व्यवस्था",
+      "संविधान को व्यावहारिक रूप से लागू करने वाली व्यवस्था",
+      "आर्थिक व्यवस्था",
+      "शिक्षा व्यवस्था"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "अनुच्छेद 17 किससे संबंधित है?",
+    options: [
+      "इक्वलिटी बिफोर लॉ",
+      "अस्पृश्यता का अंत",
+      "धर्म की स्वतंत्रता",
+      "नागरिकता का अधिकार"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "नागरिक अधिकार संरक्षण अधिनियम किस वर्ष लागू हुआ?",
+    options: [
+      "1962",
+      "1975",
+      "1955",
+      "1947"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "भारत के संविधान का सबसे अधिक अनुच्छेद किस अधिनियम से लिए गए?",
+    options: [
+      "1935 का भारतीय सरकार अधिनियम",
+      "1858 का अधिनियम",
+      "1861 का परिषद अधिनियम",
+      "1773 का रेगुलेटिंग एक्ट"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "भारत की संविधान सभा के प्रारंभ में कितने सदस्य थे?",
+    options: [
+      "299",
+      "289",
+      "199",
+      "389"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "संविधान की व्याख्या करने वाले बिंदु को क्या कहते हैं?",
+    options: [
+      "धारा",
+      "अनुच्छेद",
+      "धारा व अनुच्छेद दोनों",
+      "भाग"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "नक्सलवाद भारत में कब शुरू हुआ?",
+    options: [
+      "1942",
+      "1955",
+      "1967",
+      "1977"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "नक्सलवाद आंदोलन के प्रमुख नेता कौन थे?",
+    options: [
+      "लाल बहादुर शास्त्री",
+      "माओ ज़ेदोंग",
+      "चारू मजूमदार",
+      "बाबा साहेब अंबेडकर"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "UAPA एक्ट किस वर्ष आया?",
+    options: [
+      "1971",
+      "1985",
+      "2005",
+      "1967"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "संविधान को लागू करने के लिए किन अंगों की आवश्यकता होती है?",
+    options: [
+      "संसद",
+      "न्यायपालिका",
+      "गैर संवैधानिक संस्थाएं",
+      "उपरोक्त सभी"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "निम्न में से कौन-सी संस्था संवैधानिक संस्था है?",
+    options: [
+      "वित्त आयोग",
+      "मानव अधिकार आयोग",
+      "नीति आयोग",
+      "राष्ट्रीय महिला आयोग"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "मानव अधिकार आयोग किस प्रकार की संस्था है?",
+    options: [
+      "संवैधानिक",
+      "असंवैधानिक",
+      "सांविधिक",
+      "कार्यपालिका"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "नीति आयोग किस वर्ष बना?",
+    options: [
+      "2001",
+      "2015",
+      "2010",
+      "2020"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "भारत में संसद किस कार्य के लिए उत्तरदायी है?",
+    options: [
+      "कानून बनाने के लिए",
+      "मंत्रियों की नियुक्ति के लिए",
+      "अदालत चलाने के लिए",
+      "पुलिस व्यवस्था के लिए"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "संविधान के बिना देश क्यों नहीं चल सकता?",
+    options: [
+      "लोग अनुशासनहीन हो जाते हैं",
+      "देश की एकता बनी नहीं रहती",
+      "सभी के लिए समान कानून नहीं होगा",
+      "उपरोक्त सभी"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "संविधान द्वारा निर्धारित शासन का मुख्य बिंदु क्या है?",
+    options: [
+      "शासन में अनुशासन",
+      "लोकतंत्र में सत्ता का स्रोत जनता है",
+      "सिर्फ राजा शासन करता है",
+      "केवल धर्म आधारित कानून"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "संवैधानिक संस्था का उदाहरण है:",
+    options: [
+      "निर्वाचन आयोग",
+      "राष्ट्रीय मानव अधिकार आयोग",
+      "राष्ट्रीय महिला आयोग",
+      "नीति आयोग"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "भारत में वित्त आयोग संविधान के किस अनुच्छेद के अधीन आता है?",
+    options: [
+      "अनुच्छेद 280",
+      "अनुच्छेद 370",
+      "अनुच्छेद 356",
+      "अनुच्छेद 15"
+    ],
+    correctIndex: 0
+  }
+];
+
+
+
+
+    const form = document.getElementById("quizForm");
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question-block";
+      div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+      const optionsHTML = q.options.map((opt, j) => {
+        return `
+          <label>
+            <input type="radio" name="q${i}" value="${j}" /> ${opt}
+          </label>
+        `;
+      }).join("");
+
+      div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>

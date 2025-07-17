@@ -679,5 +679,17 @@
             "quizLink": "",
             "examLink": ""
         }
-    ]
+    ],
+    "ssc_quiz": [{
+            "topic": "this is topic",
+            "fileLink": "#",
+            "quizLink": "#",
+            "examLink": "D:\\projects\\7pi_data\\SSC_Quizzes\\SSC01A.html"
+        },
+    {
+            "topic": "this is topic",
+            "fileLink": "#",
+            "quizLink": "",
+            "examLink": ""
+        }]
 }
