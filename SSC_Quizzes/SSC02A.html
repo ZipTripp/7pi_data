@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - Constitutional Development</title>
+
+  <!-- Constitution-and-Indian-Polity_By-Naveen-Sir-_-SSC-Foundation-naayk-Batch-2025 -->
+   <!-- SSC01A -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    /* submit button style */
+    .submit-button {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+    }
+
+    .submit-button:active {
+      background-color: #3e8e41;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Features of Indian Constitution Polity part 1 - Quiz</h1>
+  <p> By Naveen Sir SSC Foundation naayk Batch 2025 </p>
+  <p class="text-code">Test Code: SSC02A </p>
+
+  <form id="quizForm"></form>
+  <button class="submit-button" onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+const quizData = [
+  {
+    question: "भारतीय संविधान किस प्रकार का है?",
+    options: [
+      "लिखित",
+      "अलिखित",
+      "मौखिक",
+      "संपूर्ण अलिखित"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "लिखित संविधान का सबसे बड़ा लाभ क्या है?",
+    options: [
+      "कम खर्चीला",
+      "स्पष्ट रूप से नियम व प्रावधान निरुपित",
+      "पारंपरिक नियमों पर आधारित",
+      "लचीला"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "विश्व का सबसे पुराना लिखित संविधान किस देश का है?",
+    options: [
+      "भारत",
+      "मोनाको",
+      "नेपाल",
+      "अमेरिका"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "मोनाको के संविधान में कितने शब्द हैं?",
+    options: [
+      "3814",
+      "1215",
+      "7762",
+      "1950"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "विश्व का सबसे छोटा लिखित संविधान (शब्दों के आधार पर) किस देश का है?",
+    options: [
+      "अमेरिका",
+      "नेपाल",
+      "मोनाको",
+      "ब्रिटेन"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "अलिखित संविधान का मुख्य उदाहरण कौन सा देश है?",
+    options: [
+      "अमेरिका",
+      "ब्रिटेन",
+      "भारत",
+      "फ्रांस"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "भारत का संविधान कब लागू हुआ?",
+    options: [
+      "26 जनवरी 1950",
+      "15 अगस्त 1947",
+      "2 अक्टूबर 1949",
+      "26 नवंबर 1949"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "भारत के संविधान को 'अर्द्ध संघात्मक (Quasi Federal)' किसने कहा?",
+    options: [
+      "मॉरिस जोन्स",
+      "केसी व्हेयर",
+      "आइवर जेनिंग्स",
+      "ग्रेन विल ऑस्टिन"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "संविधान में शक्तियों के केंद्रीकरण को क्या कहा जाता है?",
+    options: [
+      "संघात्मकता",
+      "विकेंद्रीकरण",
+      "एकात्मकता",
+      "समन्वय"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "संविधान शासन प्रणाली के आधार पर कितने प्रकार का हो सकता है?",
+    options: [
+      "एक",
+      "दो",
+      "तीन",
+      "चार"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "भारत में संघीय व्यवस्था किस देश के मॉडल पर आधारित है?",
+    options: [
+      "ब्रिटेन",
+      "आयरलैंड",
+      "कनाडा",
+      "फ्रांस"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "Unitary Government (एकात्मक सरकार) की विशेषता क्या है?",
+    options: [
+      "शक्तियों का विकेंद्रीकरण",
+      "केवल एक सरकार",
+      "दोहरी सरकार प्रणाली",
+      "सभी नागरिकों की स्वायत्तता"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "ड्यूल गवर्नमेंट (द्वैध सरकार) का अर्थ है:",
+    options: [
+      "शक्तियों का केंद्रीकरण",
+      "केवल केंद्रीय सरकार",
+      "केंद्र व राज्य स्तर पर सरकार",
+      "केवल राज्य सरकार"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "भारत को 'सहकारी संघवाद' (Cooperative Federalism) किसने कहा?",
+    options: [
+      "आइवर जेनिंग्स",
+      "बाबा साहब अंबेडकर",
+      "ग्रेन विल ऑस्टिन",
+      "मॉरिस जोन्स"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "रेजिड शक्ति (Residuary Power) भारत में किसके पास है?",
+    options: [
+      "राज्य सरकार",
+      "केंद्र सरकार",
+      "स्थानीय निकाय",
+      "न्यायपालिका"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "भारत के संविधान के जनक किसे कहा जाता है?",
+    options: [
+      "पंडित नेहरू",
+      "डॉ. राजेन्द्र प्रसाद",
+      "डॉ. भीमराव अम्बेडकर",
+      "सरदार पटेल"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "संविधान को अंग्रेज़ी में किसने लिखा?",
+    options: [
+      "प्रेम बिहारी नारायण रायजादा",
+      "बसंत कृष्ण वैद्य",
+      "आइवर जेनिंग्स",
+      "रामप्रसाद सक्सेना"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "संविधान को हिंदी में किसने लिखा?",
+    options: [
+      "डॉ. भीमराव अम्बेडकर",
+      "बसंत कृष्ण वैद्य",
+      "प्रेम बिहारी नारायण रायजादा",
+      "रामप्रसाद सक्सेना"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "ब्रिटेन के संविधान की रीड किस दस्तावेज़ को कहा जाता है?",
+    options: [
+      "1215 का मैगना कार्टा",
+      "1789 का अमेरिकी संविधान",
+      "मोनाको का संविधान",
+      "फ्रांस का संविधान"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "संविधान की कितनी श्रेणियां संकलन/कंपाइलेशन के आधार पर होती हैं?",
+    options: [
+      "एक",
+      "दो",
+      "तीन",
+      "चार"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "मॉनार्की (राजतंत्र) किस संविधान प्रणाली से संबंधित है?",
+    options: [
+      "फेडरल",
+      "यूनिटरी",
+      "लोकतंत्र",
+      "रेजिड"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "सर्वाधिक विवाद केंद्र और राज्य में किस प्रकार की सरकार में होते हैं?",
+    options: [
+      "एकात्मक",
+      "संघात्मक",
+      "अर्थ संघात्मक",
+      "राजतंत्र"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "किस देश के संविधान में सबसे कम अनुच्छेद हैं?",
+    options: [
+      "फ्रांस",
+      "अमेरिका",
+      "भारत",
+      "ब्रिटेन"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "भारत के संविधान का स्वरूप क्या है?",
+    options: [
+      "अर्थ संघात्मक (Quasi-federal)",
+      "पूरी तरह संघात्मक",
+      "पूरी तरह एकात्मक",
+      "केवल राजतंत्रात्मक"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "नेशनल इमरजेंसी लगने पर भारतीय संविधान का स्वरूप कैसा हो जाता है?",
+    options: [
+      "यूनिटरी",
+      "फेडरल",
+      "संविधानिक",
+      "मिलिट्री"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "Magna Carta किस वर्ष जारी हुआ था?",
+    options: [
+      "1949",
+      "1215",
+      "1789",
+      "1950"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "Residuary Powers सामान्यतः फेडरेशन में किसके पास होती हैं?",
+    options: [
+      "राज्य सरकारों के पास",
+      "केंद्र सरकार के पास",
+      "न्यायपालिका के पास",
+      "संसद के पास"
+    ],
+    correctIndex: 0
+  },
+  {
+    question: "संविधान देश की सरकार के किस स्वरूप को निर्धारित करता है?",
+    options: [
+      "संसदात्मक",
+      "अध्यक्षात्मक",
+      "अर्ध-अध्यक्षात्मक",
+      "इनमें से सभी"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "भारत में असली शासन का प्रमुख कौन है?",
+    options: [
+      "राष्ट्रपति",
+      "प्रधानमंत्री",
+      "मुख्यमंत्री",
+      "राज्यपाल"
+    ],
+    correctIndex: 1
+  },
+  {
+    question: "संविधान संशोधन के आधार पर भारत का संविधान कैसा है?",
+    options: [
+      "कठोर",
+      "लचीला",
+      "मिश्रित (na rigid na flexible)",
+      "अपरिवर्तनीय"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "अलिखित संविधान किन देशों का मुख्य रूप से है?",
+    options: [
+      "ब्रिटेन, कनाडा, न्यूजीलैंड",
+      "अमेरिका, भारत, फ्रांस",
+      "नेपाल, जापान, क्यूबा",
+      "मोनाको, पाकिस्तान, श्रीलंका"
+    ],
+    correctIndex: 0
+  }
+];
+
+
+
+
+
+    const form = document.getElementById("quizForm");
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question-block";
+      div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+      const optionsHTML = q.options.map((opt, j) => {
+        return `
+          <label>
+            <input type="radio" name="q${i}" value="${j}" /> ${opt}
+          </label>
+        `;
+      }).join("");
+
+      div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>

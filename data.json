@@ -682,15 +682,15 @@
     ],
 
     "SSC-Foundation-Naayk-Batch-2025-Quiz": [{
-            "topic": "Constitution and Indian Polity By Naveen Sir",
-            "fileLink": "",
-            "quizLink": "https://github.com/ZipTripp/7pi_data/blob/main/SSC_Quizzes/SSC01A.html",
-            "examLink": "https://ziptripp.github.io/7pi_data/SSC_Quizzes/SSC01A.html"
+            "topic": "Constitution and Indian Polity By Naveen Sir [1]",
+            "fileLink": "#",
+            "quizLink": "https://ziptripp.github.io/7pi_data/SSC_Quizzes/SSC01A.html",
+            "examLink": "#"
         },
     {
-            "topic": "this is topic",
-            "fileLink": "",
-            "quizLink": "https://ziptripp.github.io/7pi_data/SSC_Quizzes/SSC01A.html",
-            "examLink": ""
+            "topic": "Features of Indian Constitution Polity By Naveen Sir [2]",
+            "fileLink": "#",
+            "quizLink": "https://ziptripp.github.io/7pi_data/SSC_Quizzes/SSC02A.html",
+            "examLink": "#"
         }]
 }
