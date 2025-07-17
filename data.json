@@ -680,15 +680,16 @@
             "examLink": ""
         }
     ],
-    "ssc_quiz": [{
-            "topic": "this is topic",
-            "fileLink": "#",
-            "quizLink": "#",
-            "examLink": "D:\\projects\\7pi_data\\SSC_Quizzes\\SSC01A.html"
+
+    "SSC-Foundation-Naayk-Batch-2025-Quiz": [{
+            "topic": "Constitution and Indian Polity By Naveen Sir",
+            "fileLink": "",
+            "quizLink": "https://github.com/ZipTripp/7pi_data/blob/main/SSC_Quizzes/SSC01A.html",
+            "examLink": "https://github.com/ZipTripp/7pi_data/blob/main/SSC_Quizzes/SSC01A.html"
         },
     {
             "topic": "this is topic",
-            "fileLink": "#",
+            "fileLink": "",
             "quizLink": "",
             "examLink": ""
         }]
