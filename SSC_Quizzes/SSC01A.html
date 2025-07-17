@@ -36,6 +36,29 @@
       border-radius: 8px;
       margin-top: 20px;
     }
+    /* submit button style */
+    .submit-button {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+    }
+
+    .submit-button:active {
+      background-color: #3e8e41;
+      transform: translateY(0);
+    }
+
   </style>
 </head>
 <body>
@@ -44,7 +67,7 @@
   <p class="text-code">Test Code: SSC01A </p>
 
   <form id="quizForm"></form>
-  <button onclick="submitQuiz()">Submit Quiz</button>
+  <button class="submit-button" onclick="submitQuiz()">Submit Quiz</button>
   <div id="result" class="result"></div>
 
   <script>
