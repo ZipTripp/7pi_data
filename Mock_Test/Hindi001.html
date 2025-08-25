@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - Constitutional Development</title>
+
+  
+   <!-- SSC03A -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .result {
+      padding: 15px;
+      background: #e6f4ea;
+      border: 1px solid #b2d8c6;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    /* submit button style */
+    .submit-button {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+    }
+
+    .submit-button:active {
+      background-color: #3e8e41;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Polity-Organs-of-Government--Polity-By-Naveen-Sir--SSC-Foundation-naayk-Batch-2025 -->
+  <h1>Polity Organs of Government part-3 - Quiz</h1>
+  <p> By Naveen Sir SSC Foundation naayk Batch 2025 </p>
+  <p class="text-code">Test Code: SSC03A </p>
+
+  <form id="quizForm"></form>
+  <button class="submit-button" onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+
+<script>
+const quizData = [
+  {
+    question: "निम्नलिखित पंक्तियों में कौन सा रस है? 'शोभित कर नवनीत लिए घुटूनी चलत रेनू तन मंडित मुख दधि लेप किए।'",
+    options: ["वीर रस", "श्रृंगार रस", "वात्सल्य रस", "करुण रस"],
+    correctIndex: 2
+  },
+  {
+    question: "रसोत्पत्ति में आश्रय की चेष्टाओं को क्या कहा जाता है?",
+    options: ["अनुभाव", "विभाव", "अनुभूति", "संचारी"],
+    correctIndex: 0
+  },
+  {
+    question: "रस संप्रदाय के प्रवर्तक कौन हैं?",
+    options: ["नंदकेश्वर", "भरत मुनि", "शास्त्री", "कालिदास"],
+    correctIndex: 1
+  },
+  {
+    question: "काव्य में कठोर वर्णों का प्रयोग किस गुण के लिए होता है?",
+    options: ["माधुर्य", "वीरता", "करुणा", "अद्भुत"],
+    correctIndex: 1
+  },
+  {
+    question: "जगड़ छंद में कितने लघु वर्ण होते हैं?",
+    options: ["2", "3", "4", "6"],
+    correctIndex: 1
+  },
+  {
+    question: "जगड़ छंद में कितने गुरु वर्ण होते हैं?",
+    options: ["11", "12", "14", "15"],
+    correctIndex: 0
+  },
+  {
+    question: "'मुदित महपति मंदिर आए सेवक सचिव सुमंत बुलाए' इन पंक्तियों में कौन सा अलंकार है?",
+    options: ["श्लेष अलंकार", "अनुप्रास अलंकार", "उपमा अलंकार", "यमक अलंकार"],
+    correctIndex: 1
+  },
+  {
+    question: "'सपना सपना समझकर भूल ना जाना' इन पंक्तियों में कौन सा अलंकार है?",
+    options: ["उपमा", "प्रतीक", "यमक", "अनुप्रास"],
+    correctIndex: 2
+  },
+  {
+    question: "'नील गगन सा शांत हृदय था सो रहा' इन पंक्तियों में कौन सा अलंकार है?",
+    options: ["रूपक", "उपमा", "अतिशयोक्ति", "श्लेष"],
+    correctIndex: 1
+  },
+  {
+    question: "'फूल हसे और कलियां मुस्काएं' में कौन सा अलंकार है?",
+    options: ["उपमा", "मानवीकरण", "अनुप्रास", "यमक"],
+    correctIndex: 1
+  },
+  {
+    question: "पदबंध में 'कछुआ धीरे-धीरे चलते हुए मंजिल तक पहुंच गया।' कौन सा पदबंध है?",
+    options: ["समास", "क्रिया विशेषण पद", "संधि", "तत्पुरुष"],
+    correctIndex: 1
+  },
+  {
+    question: "संधि में 'अन्वेषण' शब्द का विच्छेद क्या है?",
+    options: ["अनु + एषण", "अन + वेषण", "अनु + शोध", "अन + शोध"],
+    correctIndex: 0
+  },
+  {
+    question: "पंचवटी शब्द में कौन सा समास है?",
+    options: ["द्विगु समास", "तत्पुरुष समास", "बहुव्रीहि समास", "कर्मधारय समास"],
+    correctIndex: 0
+  },
+  {
+    question: "रोगग्रस्त शब्द में कौन सा समास है?",
+    options: ["तत्पुरुष समास", "द्वंद समास", "कर्मधारय समास", "बहुव्रीहि समास"],
+    correctIndex: 0
+  },
+  {
+    question: "'वीरबाला' में कौन सा समास है?",
+    options: ["तत्पुरुष समास", "द्वंद समास", "बहुव्रीहि समास", "कर्मधारय समास"],
+    correctIndex: 2
+  },
+  {
+    question: "स्वर के साथ स्वर मिलने से जो विकार होता है उसे क्या कहते हैं?",
+    options: ["स्वर संधि", "व्यंजन संधि", "विसर्ग संधि", "गुण संधि"],
+    correctIndex: 0
+  },
+  {
+    question: "'देव जो महान है' किस समास का उदाहरण है?",
+    options: ["द्वंद्व समास", "कर्मधारय समास", "तत्पुरुष समास", "बहुव्रीहि समास"],
+    correctIndex: 1
+  },
+  {
+    question: "'नवरात्र' में कौन सा समास होता है?",
+    options: ["बहुव्रीहि समास", "तत्पुरुष समास", "द्विगु समास", "द्वंद्व समास"],
+    correctIndex: 2
+  },
+  {
+    question: "प्रसिद्ध ग्रंथ 'नाट्यशास्त्र' के लेखक कौन हैं?",
+    options: ["भरत मुनि", "भामा", "डंडी", "उद्भट"],
+    correctIndex: 0
+  },
+  {
+    question: "आनंदवर्धन ने कौन सी रचना की है?",
+    options: ["ध्वन्यालोक", "काव्य मीमांसा", "काव्यालंकार", "नाट्यशास्त्र"],
+    correctIndex: 0
+  },
+  {
+    question: "वक्रोक्ति संप्रदाय के प्रवर्तक कौन हैं?",
+    options: ["भामा", "कुंतक", "आनंदवर्धन", "डंडी"],
+    correctIndex: 1
+  },
+  {
+    question: "संस्कृत के भट्ट नायक की प्रमुख रचना क्या है?",
+    options: ["हृदय दर्पण", "रस गंगाधर", "काव्य मीमांसा", "वक्रोक्ति जीवितम"],
+    correctIndex: 0
+  },
+  {
+    question: "'निरोग' में प्रयुक्त संधि कौन सी है?",
+    options: ["विसर्ग संधि", "गुण संधि", "दीर्घ संधि", "वृद्धि संधि"],
+    correctIndex: 0
+  },
+  {
+    question: "किस शब्द में अव्ययीभाव समास नहीं माना जाता?",
+    options: ["चतुरानन", "चतुर्भुज", "यथा", "प्रति"],
+    correctIndex: 0
+  },
+  {
+    question: "आप घर जाएंगे या पार्क जाएंगे। यह वाक्य किस प्रकार का है?",
+    options: ["संयुक्त वाक्य", "मिश्र वाक्य", "सरल वाक्य", "प्रश्नवाचक वाक्य"],
+    correctIndex: 1
+  },
+  {
+    question: "'गड़े मुर्दे उखाड़ना' मुहावरे का अर्थ क्या है?",
+    options: ["भूत से डरना", "बात छुपाना", "दबी हुई बात फिर से उभारना", "मुर्दा दफनाना"],
+    correctIndex: 2
+  },
+  {
+    question: "'सर्वोत्तम' शब्द का संधि विच्छेद क्या है?",
+    options: ["सर् + उत्तम", "सर्व + उत्तम", "सर्व + उत्ताम", "सर् + उत्ताम"],
+    correctIndex: 1
+  },
+  {
+    question: "वज्रायुध में कौन-सा समास है?",
+    options: ["बहुव्रीहि", "द्वंद्व", "द्विगु", "अव्ययीभाव"],
+    correctIndex: 0
+  },
+  {
+    question: "'अकाउंटेबिलिटी' का सही पारिभाषिक शब्द क्या है?",
+    options: ["योग्यता", "उत्तरदायित्व", "लेखा शीर्ष", "जवाबदेही"],
+    correctIndex: 1
+  },
+  {
+    question: "'पदबंध' के अंतर्गत कौन शामिल नहीं है?",
+    options: ["संज्ञा पदबंध", "क्रिया पदबंध", "विशेषण पदबंध", "सर्वनाम पदबंध"],
+    correctIndex: 0
+  }
+];
+
+
+
+
+
+
+    const form = document.getElementById("quizForm");
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question-block";
+      div.innerHTML = `<p><strong>Q${i + 1}.</strong> ${q.question}</p>`;
+
+      const optionsHTML = q.options.map((opt, j) => {
+        return `
+          <label>
+            <input type="radio" name="q${i}" value="${j}" /> ${opt}
+          </label>
+        `;
+      }).join("");
+
+      div.innerHTML += `<div class="options">${optionsHTML}</div>`;
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      let output = "<h2>परिणाम:</h2><ul>";
+
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const answer = q.correctIndex;
+
+        if (selected) {
+          const chosenIndex = parseInt(selected.value);
+          const isCorrect = chosenIndex === answer;
+          if (isCorrect) score++;
+
+          output += `<li><strong>Q${i + 1}:</strong> आपने चुना: ${q.options[chosenIndex]} — ${isCorrect ? "✅ सही" : `❌ गलत (सही उत्तर: ${q.options[answer]})`} </li>`;
+        } else {
+          output += `<li><strong>Q${i + 1}:</strong> कोई उत्तर नहीं चुना ❌ (सही उत्तर: ${q.options[answer]})</li>`;
+        }
+      });
+
+      output += `</ul><h3>आपका स्कोर: ${score} / ${quizData.length}</h3>`;
+      document.getElementById("result").innerHTML = output;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
